@@ -1,7 +1,7 @@
 {
   "scripts": {
     "compile": "tsc --jsx react --module commonjs --outDir ./build ./src/index.tsx",
-    "browserify": "browserify build/index.js -o build/app.js"
+    "bundle": "browserify build/index.js -o build/app.js"
   },
   "devDependencies": {
     "react": "^0.14.3",

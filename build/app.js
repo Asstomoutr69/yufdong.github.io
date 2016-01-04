@@ -84,11 +84,11 @@ var Rikka = (function (_super) {
         position: { x: 0, y: 0 },
         mouse: { x: 0, y: 0 },
         frame: 0,
-        imageLinks: ["http://imgur.com/W111tCi.png",
-            "http://imgur.com/t42bNGy.png",
-            "http://imgur.com/5MUGE9i.png",
-            "http://imgur.com/W0DB7hW.png",
-            "http://imgur.com/1xc0Sva.png"]
+        imageLinks: ["images/Rikka_1.png",
+            "images/Rikka_2.png",
+            "images/Rikka_3.png",
+            "images/Rikka_4.png",
+            "images/Rikka_5.png"]
     };
     return Rikka;
 })(React.Component);
