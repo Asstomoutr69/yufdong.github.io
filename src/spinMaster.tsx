@@ -37,6 +37,8 @@ class SpinMaster extends React.Component<P, S> {
   animationTimeout: any;
   
   componentDidMount() {
+    window.addEventListener("keydown", this.handleKeyPress);
+    window.addEventListener("mousemove", this.handleMouseMove);
     window.addEventListener('resize', this.resizeWindow);
     this.resizeWindow();
   }
@@ -70,25 +72,34 @@ class SpinMaster extends React.Component<P, S> {
   }
   
   handleKeyPress = (event) => {
-    // Right Arrow 39, Left Arrow 37
-    if(event.which === 39 && !this.state.framePause) {
+    var key = event.which || event.keyCode || 0;
+    // On FireFox, prevent arrow keys and space button scrolling the screen
+    switch(key){
+      case 37: case 39: case 38:  case 40: // Arrow keys
+      case 32: event.preventDefault(); break; // Space
+      default: break; // do not block other keys
+    }
+    // Right Arrow 39
+    if(key === 39 && !this.state.framePause) {
       this.pauseFrame();
       let newFrame = (this.state.frame + 1) % 5;
       this.setState({frame: newFrame});
     }
-    else if(event.which === 37 && !this.state.framePause) {
+    // Left Arrow 37
+    else if(key === 37 && !this.state.framePause) {
       this.pauseFrame();
       let newFrame = (this.state.frame - 1) % 5;
       if(newFrame < 0) newFrame = 4;
       this.setState({frame: newFrame});
     }
-    else if(event.which === 32) {
+    // Spacebar 32
+    else if(key === 32) {
       if(this.state.animating) {
         this.stopAnimation();
       }
       else {
         this.animateForward();
-      } 
+      }
     }
   }
   
@@ -141,16 +152,15 @@ class SpinMaster extends React.Component<P, S> {
 
   render() {
     return(
-      <div onMouseMove={this.handleMouseMove} onKeyDown={this.handleKeyPress} tabIndex={0}
-        style={{width: this.state.windowWidth, height: this.state.windowHeight, overflow: "hidden"}}>
+      <div id="spinMaster" tabIndex={0}
+        style={{width: this.state.windowWidth, height: this.state.windowHeight, overflow: "hidden", position: "absolute"}}>
         
-        {this.renderRikkas()};
+        {this.renderRikkas()}
       </div>
     );
   }
   
 }
-
 
 interface P extends React.Props<any> {
   imageSize?: number;

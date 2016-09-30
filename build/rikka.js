@@ -52,6 +52,14 @@ var Rikka = (function (_super) {
                 _this.setState({ zIndex: newArray });
             }
         };
+        this.renderImages = function () {
+            var images = [];
+            for (var i = 0; i < 5; i++) {
+                images.push(React.createElement("image", {"key": i, "src": _this.props.imageLinks[i], "style": { position: "absolute", left: _this.props.position.x, top: _this.props.position.y, zIndex: _this.state.zIndex[i],
+                    width: _this.props.length, height: _this.props.length }}));
+            }
+            return images;
+        };
     }
     Rikka.prototype.componentWillReceiveProps = function (nextProps) {
         if (this.props.mouse.x != nextProps.mouse.x || this.props.mouse.y != nextProps.mouse.y) {
@@ -62,12 +70,7 @@ var Rikka = (function (_super) {
         }
     };
     Rikka.prototype.render = function () {
-        return (React.createElement("div", null, React.createElement("image", {"src": this.props.imageLinks[0], "style": { position: "absolute", left: this.props.position.x, top: this.props.position.y, zIndex: this.state.zIndex[0],
-            width: this.props.length, height: this.props.length }}), React.createElement("image", {"src": this.props.imageLinks[1], "style": { position: "absolute", left: this.props.position.x, top: this.props.position.y, zIndex: this.state.zIndex[1],
-            width: this.props.length, height: this.props.length }}), React.createElement("image", {"src": this.props.imageLinks[2], "style": { position: "absolute", left: this.props.position.x, top: this.props.position.y, zIndex: this.state.zIndex[2],
-            width: this.props.length, height: this.props.length }}), React.createElement("image", {"src": this.props.imageLinks[3], "style": { position: "absolute", left: this.props.position.x, top: this.props.position.y, zIndex: this.state.zIndex[3],
-            width: this.props.length, height: this.props.length }}), React.createElement("image", {"src": this.props.imageLinks[4], "style": { position: "absolute", left: this.props.position.x, top: this.props.position.y, zIndex: this.state.zIndex[4],
-            width: this.props.length, height: this.props.length }})));
+        return (React.createElement("div", null, this.renderImages()));
     };
     Rikka.defaultProps = {
         length: -1,

@@ -76,24 +76,21 @@ class Rikka extends React.Component<P, S> {
     }
   }
 
+  renderImages = () => {
+    var images = [];
+    for (var i = 0; i < 5; i++) {
+      images.push(
+        <image key={i} src={this.props.imageLinks[i]}
+          style={{position: "absolute", left: this.props.position.x, top: this.props.position.y, zIndex:this.state.zIndex[i],
+          width: this.props.length, height: this.props.length}} />)
+    }
+    return images;
+  }
+
   render() {
     return(
       <div>
-        <image src={this.props.imageLinks[0]}
-          style={{position: "absolute", left: this.props.position.x, top: this.props.position.y, zIndex:this.state.zIndex[0],
-          width: this.props.length, height: this.props.length}} />
-        <image src={this.props.imageLinks[1]}
-          style={{position: "absolute", left: this.props.position.x, top: this.props.position.y, zIndex:this.state.zIndex[1],
-          width: this.props.length, height: this.props.length}} />
-        <image src={this.props.imageLinks[2]}
-          style={{position: "absolute", left: this.props.position.x, top: this.props.position.y, zIndex:this.state.zIndex[2],
-          width: this.props.length, height: this.props.length}} />
-        <image src={this.props.imageLinks[3]}
-          style={{position: "absolute", left: this.props.position.x, top: this.props.position.y, zIndex:this.state.zIndex[3],
-          width: this.props.length, height: this.props.length}} />
-        <image src={this.props.imageLinks[4]}
-          style={{position: "absolute", left: this.props.position.x, top: this.props.position.y, zIndex:this.state.zIndex[4],
-          width: this.props.length, height: this.props.length}} />
+        {this.renderImages()}
       </div>
     );
   }

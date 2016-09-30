@@ -1,14 +1,46 @@
 <head>
+  <meta charset="UTF-8">
   <title>Rikka Finger Spin</title>
-</head>
-<body>
-  <div id="app"></div>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
 
   <style>
-  body{
-    overflow: hidden;
-  }
+    body {
+      overflow: hidden;
+      margin: 0px;
+    }
+    .indent {
+      margin-left: 20px;
+    }
+    .custom-font-large {
+      font-size: 20px;
+    }
+    .control-panel {
+      border-radius: 0px 0px 15px 15px;
+      border-left: 2px solid rgba(255, 255, 255, 0.3);
+      border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+      border-right: 2px solid rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.3);
+      padding: 10px; 
+      width: 500px;
+      height: 80px;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      position: absolute;
+      z-index: 100;
+    }
+    .control-panel-glyph {
+      color: white;
+      font-size: 2.5em;
+    }
   </style>
+</head>
+
+<body>
+
+  <div id="app"></div>
 
   <script type="text/javascript" src="build/app.js">
   </script>

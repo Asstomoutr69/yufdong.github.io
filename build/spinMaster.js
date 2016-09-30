@@ -52,20 +52,32 @@ var SpinMaster = (function (_super) {
             }
         };
         this.handleKeyPress = function (event) {
-            // Right Arrow 39, Left Arrow 37
-            if (event.which === 39 && !_this.state.framePause) {
+            var key = event.which || event.keyCode || 0;
+            // On FireFox, prevent arrow keys and space button scrolling the screen
+            switch (key) {
+                case 37:
+                case 39:
+                case 38:
+                case 40: // Arrow keys
+                case 32:
+                    event.preventDefault();
+                    break; // Space
+                default: break; // do not block other keys
+            }
+            // Right Arrow 39
+            if (key === 39 && !_this.state.framePause) {
                 _this.pauseFrame();
                 var newFrame = (_this.state.frame + 1) % 5;
                 _this.setState({ frame: newFrame });
             }
-            else if (event.which === 37 && !_this.state.framePause) {
+            else if (key === 37 && !_this.state.framePause) {
                 _this.pauseFrame();
                 var newFrame = (_this.state.frame - 1) % 5;
                 if (newFrame < 0)
                     newFrame = 4;
                 _this.setState({ frame: newFrame });
             }
-            else if (event.which === 32) {
+            else if (key === 32) {
                 if (_this.state.animating) {
                     _this.stopAnimation();
                 }
@@ -112,11 +124,13 @@ var SpinMaster = (function (_super) {
         };
     }
     SpinMaster.prototype.componentDidMount = function () {
+        window.addEventListener("keydown", this.handleKeyPress);
+        window.addEventListener("mousemove", this.handleMouseMove);
         window.addEventListener('resize', this.resizeWindow);
         this.resizeWindow();
     };
     SpinMaster.prototype.render = function () {
-        return (React.createElement("div", {"onMouseMove": this.handleMouseMove, "onKeyDown": this.handleKeyPress, "tabIndex": 0, "style": { width: this.state.windowWidth, height: this.state.windowHeight, overflow: "hidden" }}, this.renderRikkas(), ";"));
+        return (React.createElement("div", {"id": "spinMaster", "tabIndex": 0, "style": { width: this.state.windowWidth, height: this.state.windowHeight, overflow: "hidden", position: "absolute" }}, this.renderRikkas()));
     };
     SpinMaster.defaultProps = {
         imageSize: 200,
